@@ -7,7 +7,7 @@ defineQuery(`*[_type == "startup" && defined(slug.current) && !defined($search) 
   slug,
   _createdAt,
     author -> {
-      _id, name, image, bio
+      _id, name, image, bio, username
     },
     views,
     description,
@@ -65,7 +65,7 @@ defineQuery(`*[_type == "startup" && author._ref == $id ] | order(_createdAt des
   slug,
   _createdAt,
     author -> {
-      _id, name, image, bio
+      _id, name, image, bio, username
     },
     views,
     description,

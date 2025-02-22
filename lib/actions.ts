@@ -4,6 +4,7 @@ import slugify from "slugify";
 import { parseServerActionResponse } from "./utils";
 import { auth } from "@/auth";
 import { writeClient } from "@/sanity/lib/write-client";
+import { client } from "@/sanity/lib/client";
 
 export const createPitch = async (
     form: FormData,
@@ -37,7 +38,7 @@ export const createPitch = async (
             },
             author: {
                 _type: 'reference',
-                _ref: session?.user?.id
+                _ref: session?.id
             },
             pitch
         }
@@ -60,5 +61,35 @@ export const createPitch = async (
             error: JSON.stringify(error),
             status: "ERROR"  
         })
+    }
+}
+
+export const deletePitch = async (
+    id: string
+) => {
+    const session = await auth();
+
+    if(!session){
+        return parseServerActionResponse({
+            error: "Not signed in",
+            status: "ERROR"
+        });
+    }
+
+    try{
+        const result = await client.delete({ id });
+    
+        return parseServerActionResponse({
+            ...result,
+            error: "",
+            status: "SUCCESS"
+        });
+    } catch (error){
+        console.log(error);
+
+        return parseServerActionResponse({
+            error: JSON.stringify(error),
+            status: "ERROR"
+        });
     }
 }

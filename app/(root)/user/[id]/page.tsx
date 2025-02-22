@@ -48,7 +48,7 @@ const page = async (
                     <p className="text-30-bold">
                         {session?.id === id ? "Your": "All"} Startups
                     </p>
-                    <ul className="mt-7 card_grid">
+                    <ul className="mt-7 card_grid-sm">
                         <Suspense fallback={<StartupCardSkeleton />}>
                             {id && <UserStartups id={id} />}
                         </Suspense>
