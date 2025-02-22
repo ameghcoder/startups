@@ -16,7 +16,7 @@ import View from '@/components/View';
 const md = markdownit();
 
 // export const experimental_staticRegeneration = true
-export const revalidate = true;
+export const revalidate = 60;
 
 export const experimental_serverComponents = true
 export const experimental_ppr = true
