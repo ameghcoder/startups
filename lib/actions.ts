@@ -6,7 +6,6 @@ import { auth } from "@/auth";
 import { writeClient } from "@/sanity/lib/write-client";
 
 export const createPitch = async (
-    state: any,
     form: FormData,
     pitch: string
 ) => {
@@ -38,7 +37,7 @@ export const createPitch = async (
             },
             author: {
                 _type: 'reference',
-                _ref: session?.id
+                _ref: session?.user?.id
             },
             pitch
         }

@@ -25,9 +25,9 @@ async function page({ params }: {
     const id = (await params).id;
 
     // Parallel Method to Fetch Data (takes less time then sequential)
-    const [post, { select: editorPosts}] = await Promise.all([
+    const [post, editorPosts] = await Promise.all([
         client.fetch<StartupTypeCard>(STARTUP_BY_ID_QUERY, { id }),
-        client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: 'editor-picks'})
+        client.fetch<StartupTypeCard[]>(PLAYLIST_BY_SLUG_QUERY, { slug: 'editor-picks'})
     ]);
 
 

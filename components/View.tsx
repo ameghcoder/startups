@@ -7,12 +7,13 @@ import { after } from 'next/server';
 
 
 async function View({ id }: { id : string}) {
-  const {views: totalViews} = await client.withConfig({useCdn: false}).fetch(STARTUP_VIEWS_QUERY, {id});
+  const result = await client.withConfig({useCdn: false}).fetch(STARTUP_VIEWS_QUERY, {id});
+  const totalViews = result?.views ?? 0;
 
   after(async () => {
     await writeClient
     .patch(id)
-    .set({ views: totalViews + 1 })
+    .set({ views: (totalViews as number) + 1 })
     .commit();
   })
 

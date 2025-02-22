@@ -18,8 +18,6 @@ const page = async (
     const user = await client.fetch(AUTHOR_BY_ID_QUERY, { id });
     if (!user) return notFound();
 
-    const posts = [];
-
     return (
         <>
             <section className="profile_container">
